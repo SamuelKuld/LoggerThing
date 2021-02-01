@@ -57,16 +57,7 @@ class Data():
         try:
             self.data_dictionary[key] = value
         except: 
-            try:
-                self.data_dictionary[key] = None
-            except:
-                try:
-                    self.data_dictionary[value] = key
-                except:
-                    try:
-                        self.data_dictionary[value] = None
-                    except:
-                        pass
+            pass
     
     def instantiate_data(self):
         self.add_data("unix_time", str(time.time()))
@@ -86,7 +77,7 @@ class Data():
 
 def main():
     instaniate_files()
-    print("Logger beta 2.1.0")
+    print("Logger beta 2.1.1")
     print("Made by Zed")
 
     prompt()
@@ -133,8 +124,9 @@ def main():
             clear()
             data_of_file = Data()
             data_of_file.load_data(file_choice)
-            print(f"Current File = {file_choice}")
-            print(len(f"Current File = {file_choice}") * ".")
+            current_file = f"Current File = {file_choice}"
+            print(current_file)
+            print(len(current_file) * ".")
             for key in data_of_file.data_dictionary:
                 print(f"\"{key}\" : {data_of_file.get_data(key)}")
                 print(20 * "-")
