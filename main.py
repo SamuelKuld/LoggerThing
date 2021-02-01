@@ -87,7 +87,7 @@ class Data():
 def main():
     instaniate_files()
     print("Logger beta 2.1.0")
-    print("Made by TLT_Bruh")
+    print("Made by Zed")
 
     prompt()
 
