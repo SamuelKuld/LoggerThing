@@ -15,7 +15,7 @@ def load(name_of_file):
         data = pickle.load(file)
 
     return data
-pathlib.join("")
+
 
 def dump_data_to_file(data, filename):
     with open(os.path.join("logs/" , filename), "wb+") as file:
@@ -37,7 +37,8 @@ def print_files():
         text = Data()
         text.load_data(i)
         text = text.get_data("text")
-        print(f"{i} - {text[0:50]}...")
+        abbreviated_content = "[\\n]".join(text.split("\n"))[:50]
+        print(f"{i} - {abbreviated_content}...")
         print("")
 
     print("-" * 40)
@@ -48,16 +49,10 @@ class Data():
         self.data_dictionary = {}
 
     def get_data(self, key):
-        try:
-            return self.data_dictionary[key]
-        except:
-            return None
+        return self.data_dictionary.get(key)
 
     def add_data(self, key, value):
-        try:
-            self.data_dictionary[key] = value
-        except: 
-            pass
+        self.data_dictionary[key] = value
     
     def instantiate_data(self):
         self.add_data("unix_time", str(time.time()))
@@ -77,7 +72,7 @@ class Data():
 
 def main():
     instaniate_files()
-    print("Logger beta 2.1.1")
+    print("Logger beta 2.1.2")
     print("Made by Zed")
 
     prompt()
@@ -96,6 +91,11 @@ def main():
         elif choice == "1":
             print("What would you like the name of the log to be?")
             name = prompt()
+            while name == "cancel":
+                clear()
+                print("Invalid name. Please reinput now.")
+                name = prompt()
+
             log = Data()
 
             log.instantiate_data()
@@ -104,7 +104,8 @@ def main():
             print("What would you like the contents of the log to be?")
             contents = prompt()
             log.add_data("end_time", str(time.time()))
-
+            contents = contents.split("\\n")
+            contents = "\n".join(contents)
             log.add_data("text", contents)
             log.save_data(name)
 
@@ -113,13 +114,21 @@ def main():
 
         elif choice == "2":
             print_files()
-            print("\n\nWhat file would you like to read?")
+            print(f"\n\nWhat file would you like to read?")
+            print("\n -- If you didn't mean to select this option type \"cancel\"",
+            "    Not case sensitive", sep="\n")
             file_choice = prompt()
+            if file_choice.lower() == "cancel":
+                clear()
+                main()
             while file_choice not in os.listdir("logs"):
                 clear()
                 print_files()
                 print("\n\nWhat file would you like to read?")
                 file_choice = prompt()
+                if file_choice.lower() == "cancel":
+                    clear()
+                    main()
 
             clear()
             data_of_file = Data()
