@@ -71,17 +71,11 @@ class Data():
 
 
 def main():
-    instaniate_files()
-    print("Logger beta 2.1.2")
-    print("Made by Zed")
-
-    prompt()
-
     while 1:
         clear()
-        print("1 ) Make a log")
-        print("2 ) Read a log")
-        print("exit ) Exit")
+        print("1 ) Make a log\n")
+        print("2 ) Read a log\n")
+        print("exit ) Exit\n")
 
         choice = prompt()
         clear()
@@ -101,13 +95,21 @@ def main():
             log.instantiate_data()
             log.add_data("beginning_time", str(time.time()))
             clear()
-            print("What would you like the contents of the log to be?")
-            contents = prompt()
+            print("What would you like the contents of the log to be?\n::\n" , end="")
+            contents = input()
             log.add_data("end_time", str(time.time()))
             contents = contents.split("\\n")
             contents = "\n".join(contents)
             log.add_data("text", contents)
+            clear()
+            print("Is there any extra data that you would like to add?\n")
+            extra_data = input()
+            extra_data = extra_data.split(",")
+            extra_data = [key_and_pair.split(":") for key_and_pair in extra_data]
+            for values in extra_data:
+                log.add_data(values[0], values[1])
             log.save_data(name)
+
 
             print("Saved data. Log Created.")
             prompt()
@@ -145,4 +147,8 @@ def main():
 
 
 if __name__ == "__main__":
+    instaniate_files()
+    print("Logger beta 2.1.2")
+    print("Made by Zed")
+    prompt()
     main()
