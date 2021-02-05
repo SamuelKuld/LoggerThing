@@ -1,5 +1,5 @@
 # LoggerThing
-Just a small Logger that I made in a few minutes. Trying to get second opinions for code disciplines.
+Just a logger that I am adding to occasionally to get opinions of my code.
 
 I am mostly working on this as leisure, but also in testing of different code attitudes and disciplines. I am trying to decide what the best form of practice is.
 
