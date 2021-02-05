@@ -148,7 +148,7 @@ def main():
 
 if __name__ == "__main__":
     instaniate_files()
-    print("Logger beta 2.1.2")
+    print("Logger beta 2.2.0")
     print("Made by Zed")
     prompt()
     main()
